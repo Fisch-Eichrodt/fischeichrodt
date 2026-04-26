@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fisch Eichrodt | Fischfeinkost in Hamburg-Tonndorf</title>
+  <meta name="description" content="Fisch Eichrodt in Hamburg-Tonndorf: täglich frischer Fisch, Fischfeinkost, eigene Herstellung und Fischplatten für besondere Anlässe." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{--ink:#142033;--muted:#667085;--blue:#0b4f7a;--gold:#b98942;--cream:#faf7f1;--line:#e9e3d8;--white:#fff;--shadow:0 24px 70px rgba(20,32,51,.10);--radius:26px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#fff;color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65;overflow-x:hidden}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;height:78px;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(233,227,216,.9)}
+    .nav-inner{max-width:1180px;margin:auto;height:100%;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .brand-mark{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Cormorant Garamond,serif;font-size:24px}
+    .brand small{display:block;font-size:11px;color:var(--muted);letter-spacing:.18em;margin-top:-2px}
+    .menu-btn{width:48px;height:48px;border:1px solid var(--line);border-radius:50%;background:#fff;display:grid;place-items:center;cursor:pointer;gap:5px}
+    .menu-btn span,.menu-btn:before,.menu-btn:after{content:"";width:20px;height:2px;background:var(--ink);display:block;border-radius:2px}
+    .drawer{position:fixed;inset:78px 0 auto auto;width:min(390px,100%);background:#fff;z-index:45;padding:24px;box-shadow:var(--shadow);border-left:1px solid var(--line);transform:translateX(105%);transition:.25s}
+    .drawer.open{transform:translateX(0)}
+    .drawer a{display:block;padding:18px 8px;border-bottom:1px solid var(--line);font-family:Cormorant Garamond,serif;font-size:30px}
+    .drawer .call{margin-top:24px;padding:16px 18px;border-radius:999px;background:var(--ink);color:#fff;text-align:center;font-size:15px;font-family:Inter,sans-serif;font-weight:800}
+
+    .hero{min-height:100vh;padding:120px 22px 64px;background:linear-gradient(180deg,#fff 0%,#fff 54%,var(--cream) 100%);display:grid;align-items:center}
+    .hero-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.02fr .98fr;gap:46px;align-items:center}
+    .eyebrow{color:var(--gold);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:12px}
+    .hero h1{font-family:Cormorant Garamond,serif;font-size:clamp(54px,7vw,104px);line-height:.9;margin:18px 0 22px;letter-spacing:-.045em}
+    .lead{font-size:20px;color:#475467;max-width:620px;margin:0}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+    .btn{padding:15px 24px;border-radius:999px;border:1px solid var(--ink);font-weight:800}
+    .btn.primary{background:var(--ink);color:#fff}
+    .btn.secondary{background:#fff;color:var(--ink)}
+    .hero-card{position:relative;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;background:#fff;border:1px solid var(--line)}
+    .hero-card img{width:100%;height:auto;object-fit:contain}
+    .hero-card .label{position:absolute;z-index:2;left:20px;bottom:22px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:0 16px 40px rgba(20,32,51,.12);font-weight:800}
+    .label span{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-top:2px}
+
+    section{padding:96px 22px}
+    .wrap{max-width:1180px;margin:auto}
+    .section-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:34px}
+    .section-head h2{font-family:Cormorant Garamond,serif;font-size:clamp(42px,5vw,72px);line-height:.95;margin:0;letter-spacing:-.035em}
+    .section-head p{max-width:520px;color:var(--muted);margin:0}
+
+    .plates{background:#fff}
+    .swipe-hint{display:flex;align-items:center;gap:10px;color:var(--gold);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;margin:-12px 0 18px}
+    .swipe-hint:after{content:"→";font-size:20px}
+    .plate-carousel{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 0 26px;-webkit-overflow-scrolling:touch}
+    .plate-carousel::-webkit-scrollbar{height:8px}.plate-carousel::-webkit-scrollbar-track{background:#f4efe6;border-radius:999px}.plate-carousel::-webkit-scrollbar-thumb{background:var(--gold);border-radius:999px}
+    .plate-slide{flex:0 0 min(82vw,760px);scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 50px rgba(20,32,51,.08);overflow:hidden;display:grid;grid-template-columns:1.15fr .85fr;min-height:440px}
+    .plate-slide img{height:100%;width:100%;object-fit:contain;background:#f8f5ef}
+    .plate-info{padding:38px;display:flex;flex-direction:column;justify-content:center}
+    .plate-info .num{color:var(--gold);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:12px}
+    .plate-info h3{font-family:Cormorant Garamond,serif;font-size:46px;line-height:1;margin:12px 0 14px;letter-spacing:-.025em}
+    .plate-info p{color:#4d5868;margin:0 0 22px}.plate-info ul{margin:0;padding-left:18px;color:#4d5868}.plate-info li{margin:6px 0}
+    .notice{margin-top:16px;padding:30px;border:1px solid var(--line);border-radius:var(--radius);background:var(--cream);display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center}
+    .notice h3{font-family:Cormorant Garamond,serif;font-size:38px;line-height:1;margin:0 0 8px}.notice p{margin:0;color:#4d5868}
+    .seal{width:106px;height:106px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--gold);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+
+    .about{background:var(--cream)}
+    .about-stack{display:grid;gap:28px}
+    .about-main-img,.newspaper-img{border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid #fff;background:#fff;width:100%;height:auto}
+    .about-text{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:40px;box-shadow:var(--shadow);max-width:720px}
+    .about-text h2{font-family:Cormorant Garamond,serif;font-size:62px;line-height:.95;margin:0 0 20px}
+    .about-text p{color:#4d5868}
+
+    .directions{background:#fff;padding-bottom:34px}
+    .location-card{display:grid;grid-template-columns:.58fr 1.42fr;gap:34px;align-items:stretch;background:#fff}
+    .location-copy h2{font-family:Cormorant Garamond,serif;font-size:54px;line-height:.95;margin:10px 0 24px;letter-spacing:-.035em}
+    .info-row{display:grid;grid-template-columns:34px 1fr;gap:14px;margin:20px 0;color:#344054}
+    .icon{width:34px;height:34px;border:2px solid #d9dee7;border-radius:50%;display:grid;place-items:center;color:#46556d;font-weight:800}
+    .actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:25px}
+    .call-button{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#07162b;color:white;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 10px 25px rgba(7,22,43,.18)}
+    .maps{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#fff;color:var(--ink);border:2px solid #c8d0dc;border-radius:999px;text-decoration:none;font-weight:800}
+    .map-frame{min-height:380px;border-radius:22px;overflow:hidden;background:#f5f7fa;border:1px solid var(--line)}
+    .map-frame iframe{width:100%;height:100%;min-height:380px;border:0;display:block}
+    .foot{padding:18px 22px 38px;background:#fff;color:#667085;text-align:center;border-top:1px solid #f2f2f2}
+
+    @media(max-width:900px){
+      .hero-grid,.location-card{grid-template-columns:1fr}
+      .section-head{display:block}.section-head p{margin-top:14px}
+      .plate-slide{grid-template-columns:1fr;flex-basis:86vw}.plate-slide img{height:auto;max-height:520px}
+      .map-frame,.map-frame iframe{min-height:330px}
+    }
+    @media(max-width:560px){
+      .brand div:last-child{font-size:13px}.hero{padding-top:110px}.hero-card .label{left:14px;right:14px;bottom:14px}
+      .plate-slide{flex-basis:88vw}.plate-info{padding:26px}.plate-info h3{font-size:36px}
+      .notice{grid-template-columns:1fr}.seal{display:none}.about-text{padding:28px}.drawer a{font-size:26px}
+      .location-copy h2{font-size:46px}
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#start"><span class="brand-mark">F</span><div>Fisch Eichrodt<small>Fischfeinkost & eigene Herstellung</small></div></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menü öffnen"><span></span></button>
+    </div>
+  </nav>
+
+  <aside class="drawer" id="drawer">
+    <a href="#start">Startseite</a>
+    <a href="#platten">Fischplatten</a>
+    <a href="#ueber-uns">Über uns</a>
+    <a href="#weg">Wegbeschreibung</a>
+    <a class="call" href="tel:+4940663830">040 / 663830 anrufen</a>
+  </aside>
+
+  <main id="start" class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Hamburg-Tonndorf</div>
+        <h1>Frische Fischfeinkost mit Tradition.</h1>
+        <p class="lead">Individuell zusammengestellte Fischplatten, feine Spezialitäten und persönliche Beratung direkt bei Fisch Eichrodt.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#platten">Platten ansehen</a>
+          <a class="btn secondary" href="#weg">Adresse öffnen</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="assets/lachs.jpeg" alt="Frischer Lachs von Fisch Eichrodt">
+        <div class="label">Täglich frisch <span>beste Qualität aus Hamburg</span></div>
+      </div>
+    </div>
+  </main>
+
+  <section id="platten" class="plates">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Unsere Fischplatten</h2>
+        <p>Ob Familienfeier, Firmenveranstaltung oder besonderer Anlass: Jede Platte wird frisch angerichtet und passend zu Ihren Wünschen zusammengestellt.</p>
+      </div>
+      <div class="swipe-hint">Nach rechts wischen</div>
+      <div class="plate-carousel" aria-label="Fischplatten zum Wischen">
+        <article class="plate-slide">
+          <img src="assets/platte-1.jpeg" alt="Große Genussplatte">
+          <div class="plate-info"><span class="num">Platte 01</span><h3>Große Genussplatte</h3><p>Eine reichhaltige Auswahl für Feiern, Familienfeste und besondere Anlässe – frisch angerichtet mit Lachs, Garnelen und Fischspezialitäten.</p><ul><li>Ideal für mehrere Personen</li><li>Sorten nach Wunsch anpassbar</li><li>Persönliche Beratung möglich</li></ul></div>
+        </article>
+        <article class="plate-slide">
+          <img src="assets/platte-2.jpeg" alt="Nordseeplatte">
+          <div class="plate-info"><span class="num">Platte 02</span><h3>Nordseeplatte</h3><p>Klassisch, frisch und herzhaft – mit Hering, Matjes, Lachs und feiner Garnitur.</p><ul><li>Beliebte Klassiker</li><li>Frisch dekoriert</li><li>Perfekt für kalte Buffets</li></ul></div>
+        </article>
+        <article class="plate-slide">
+          <img src="assets/platte-3.jpeg" alt="Festtagsplatte">
+          <div class="plate-info"><span class="num">Platte 03</span><h3>Festtagsplatte</h3><p>Eine besonders schöne Platte für besondere Momente – mit edler Optik, frischen Zutaten und einer festlichen Auswahl.</p><ul><li>Für Feiern und besondere Anlässe</li><li>Edle Präsentation</li><li>Auf Wunsch mit Dips</li></ul></div>
+        </article>
+        <article class="plate-slide">
+          <img src="assets/haeppchen.jpeg" alt="Fischhäppchen">
+          <div class="plate-info"><span class="num">Platte 04</span><h3>Feine Fischhäppchen</h3><p>Kleine, edle Häppchen auf Brot – ideal als Fingerfood, für Empfänge oder ein schönes Buffet.</p><ul><li>Praktisch portioniert</li><li>Dekorativ angerichtet</li><li>Für kleine und große Runden</li></ul></div>
+        </article>
+      </div>
+      <div class="notice"><div><h3>Nach Wunsch zusammengestellt</h3><p>Unsere Platten sind individuell anpassbar – von der Auswahl der Fischsorten bis zur Größe und Dekoration. Für die passende Zusammenstellung beraten wir Sie gerne persönlich im Laden oder telefonisch.</p></div><div class="seal">Beratung<br>nach<br>Wunsch</div></div>
+    </div>
+  </section>
+
+  <section id="ueber-uns" class="about">
+    <div class="wrap about-stack">
+      <img class="about-main-img" src="assets/familie.jpeg" alt="Familie von Fisch Eichrodt">
+      <div class="about-text">
+        <div class="eyebrow">Über uns</div>
+        <h2>Ein Laden mit Geschichte.</h2>
+        <p>Fisch Eichrodt steht für persönliche Nähe, handwerkliche Qualität und Fischfeinkost mit eigener Herstellung.</p>
+        <p>Als Familienbetrieb legen wir großen Wert auf frische Ware, sorgfältige Zubereitung und eine ehrliche Beratung. Viele Kunden kommen seit Jahren zu uns – für den Mittagstisch, für Fischspezialitäten oder für festliche Platten.</p>
+        <p>Der Zeitungsbericht erzählt einen Teil unserer Geschichte.</p>
+      </div>
+      <img class="newspaper-img" src="assets/zeitung.jpeg" alt="Zeitungsbericht über Fisch Eichrodt">
+    </div>
+  </section>
+
+  <section id="weg" class="directions">
+    <div class="wrap location-card">
+      <div class="location-copy">
+        <div class="eyebrow">So finden Sie uns</div>
+        <h2>Unser Standort.</h2>
+
+        <div class="info-row"><div class="icon">⌖</div><div><strong>Fisch Eichrodt</strong><br>Tonndorfer Hauptstraße 76<br>22045 Hamburg</div></div>
+        <div class="info-row"><div class="icon">◷</div><div><strong>Öffnungszeiten</strong><br>Mo – Fr: 08:00 – 18:00 Uhr<br>Sa: 08:00 – 13:00 Uhr</div></div>
+        <div class="info-row"><div class="icon">☎</div><div><strong>Telefon</strong><br>040 / 663830</div></div>
+
+        <div class="actions">
+          <a href="tel:+4940663830" class="call-button">↗ Anrufen</a>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tonndorfer+Hauptstraße+76+Hamburg" class="maps">♡ Route anzeigen</a>
+        </div>
+      </div>
+
+      <div class="map-frame">
+        <iframe src="https://maps.google.com/maps?q=Tonndorfer%20Hauptstra%C3%9Fe%2076%20Hamburg&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">© 2025 Fisch Eichrodt</footer>
+
+  <script>
+    const btn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    btn.addEventListener('click', () => drawer.classList.toggle('open'));
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => drawer.classList.remove('open')));
+  </script>
+</body>
+</html>
